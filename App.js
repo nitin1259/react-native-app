@@ -7,9 +7,12 @@ export default function App() {
     "Open up App.js to start working on your app!"
   );
   return (
-    <View>
+    <View style={{ padding: 50 }}>
       <View>
-        <TextInput />
+        <TextInput
+          placeholder="Course Goal"
+          style={{ borderBottomColor: "black", borderBottomWidth: 1 }}
+        />
         <Button title="ADD" />
       </View>
       <View></View>
