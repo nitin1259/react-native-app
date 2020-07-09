@@ -18,10 +18,10 @@ export default function App() {
   };
 
   const addGoalHandler = () => {
-    // console.log(inputGoal);
+    console.log(inputGoal);
     setCourseGoals((courseGoals) => [
       ...courseGoals,
-      { key: Math.random().toString(), value: inputGoal },
+      { id: Math.random().toString(), value: inputGoal },
     ]);
   };
 
@@ -40,6 +40,7 @@ export default function App() {
         // this will give warning her as we dont have any key here and for that it expect certain format of data with key
       }
       <FlatList
+        keyExtractor={(item, index) => item.id}
         data={courseGoals}
         renderItem={(itemData) => (
           <View style={styles.listItem}>
