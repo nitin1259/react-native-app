@@ -15,11 +15,17 @@ export default function App() {
   const [courseGoals, setCourseGoals] = useState([]);
 
   const addGoalHandler = (goalTitle) => {
-    console.log(goalTitle);
+    // console.log(goalTitle);
     setCourseGoals((courseGoals) => [
       ...courseGoals,
       { id: Math.random().toString(), value: goalTitle },
     ]);
+  };
+
+  const removeGoalHandler = (goalId) => {
+    setCourseGoals((courseGoals) => {
+      return courseGoals.filter((goal) => goal.id !== goalId);
+    });
   };
 
   return (
@@ -33,9 +39,8 @@ export default function App() {
         data={courseGoals}
         renderItem={(itemData) => (
           <GoalItem
-            onDelete={() => {
-              console.log("Does this work");
-            }}
+            id={itemData.item.id}
+            onDelete={removeGoalHandler}
             title={itemData.item.value}
           />
         )}
