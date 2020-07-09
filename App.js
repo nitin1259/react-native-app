@@ -19,7 +19,10 @@ export default function App() {
 
   const addGoalHandler = () => {
     // console.log(inputGoal);
-    setCourseGoals((courseGoals) => [...courseGoals, inputGoal]);
+    setCourseGoals((courseGoals) => [
+      ...courseGoals,
+      { key: Math.random().toString(), value: inputGoal },
+    ]);
   };
 
   return (
@@ -33,12 +36,14 @@ export default function App() {
         />
         <Button title="ADD" onPress={addGoalHandler} />
       </View>
-
+      {
+        // this will give warning her as we dont have any key here and for that it expect certain format of data with key
+      }
       <FlatList
         data={courseGoals}
         renderItem={(itemData) => (
           <View style={styles.listItem}>
-            <Text>{itemData.item}</Text>
+            <Text>{itemData.item.value}</Text>
           </View>
         )}
       />
