@@ -1,28 +1,72 @@
-import { StatusBar } from "expo-status-bar";
 import React, { useState } from "react";
-import { StyleSheet, Text, View, Button } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Button,
+  TextInput,
+  ScrollView,
+  FlatList,
+} from "react-native";
+import GoalItem from "./components/goals/GoalItem";
+import GoalInput from "./components/goals/GoalInput";
 
 export default function App() {
-  const [outputText, setOutputText] = useState(
-    "Open up App.js to start working on your app!"
-  );
+  const [courseGoals, setCourseGoals] = useState([]);
+  const [isAddMode, setIsAddMode] = useState(false);
+
+  const addGoalHandler = (goalTitle) => {
+    // console.log(goalTitle);
+    setCourseGoals((courseGoals) => [
+      ...courseGoals,
+      { id: Math.random().toString(), value: goalTitle },
+    ]);
+    setIsAddMode(false);
+  };
+
+  const removeGoalHandler = (goalId) => {
+    setCourseGoals((courseGoals) => {
+      return courseGoals.filter((goal) => goal.id !== goalId);
+    });
+  };
+
+  const onCanelhandler = () => {
+    setIsAddMode(false);
+  };
+
   return (
-    <View style={styles.container}>
-      <Text>{outputText}</Text>
+    <View style={styles.screen}>
       <Button
-        title="Click to Change Text"
-        onPress={() => setOutputText("This text has changed!!!")}
+        title="Add New Goals"
+        onPress={() => {
+          setIsAddMode(true);
+        }}
       />
-      <StatusBar style="auto" />
+      <GoalInput
+        goalHandler={addGoalHandler}
+        visible={isAddMode}
+        onCancel={onCanelhandler}
+      />
+      {
+        // this will give warning her as we dont have any key here and for that it expect certain format of data with key
+      }
+      <FlatList
+        keyExtractor={(item, index) => item.id}
+        data={courseGoals}
+        renderItem={(itemData) => (
+          <GoalItem
+            id={itemData.item.id}
+            onDelete={removeGoalHandler}
+            title={itemData.item.value}
+          />
+        )}
+      />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
+  screen: { padding: 50 },
 });
+
+// add some styling to the view
