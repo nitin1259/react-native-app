@@ -17,6 +17,9 @@ export default function HomepageBasics() {
 
   const addGoalHandler = (goalTitle) => {
     // console.log(goalTitle);
+    if (goalTitle.length === 0) {
+      return;
+    }
     setCourseGoals((courseGoals) => [
       ...courseGoals,
       { id: Math.random().toString(), value: goalTitle },
