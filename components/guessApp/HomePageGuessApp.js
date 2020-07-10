@@ -9,6 +9,11 @@ export default function HomePageGuessApp() {
   const [userNumber, setUserNumber] = useState();
   const [guessRounds, setGuessRounds] = useState(0);
 
+  const configureNewGameHandler = () => {
+    setGuessRounds(0);
+    setUserNumber(null);
+  };
+
   const startGameHandler = (selectedNumber) => {
     setUserNumber(selectedNumber);
   };
@@ -23,7 +28,13 @@ export default function HomePageGuessApp() {
       <GameScreen userChoice={userNumber} onGameOver={guessRoundHandler} />
     );
   } else if (guessRounds > 0) {
-    content = <GameOver />;
+    content = (
+      <GameOver
+        gameRounds={guessRounds}
+        userNumber={userNumber}
+        onReset={configureNewGameHandler}
+      />
+    );
   }
 
   return (
