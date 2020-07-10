@@ -13,6 +13,7 @@ import GoalInput from "./components/goals/GoalInput";
 
 export default function App() {
   const [courseGoals, setCourseGoals] = useState([]);
+  const [isAddMode, setIsAddMode] = useState(false);
 
   const addGoalHandler = (goalTitle) => {
     // console.log(goalTitle);
@@ -20,6 +21,7 @@ export default function App() {
       ...courseGoals,
       { id: Math.random().toString(), value: goalTitle },
     ]);
+    setIsAddMode(false);
   };
 
   const removeGoalHandler = (goalId) => {
@@ -28,9 +30,23 @@ export default function App() {
     });
   };
 
+  const onCanelhandler = () => {
+    setIsAddMode(false);
+  };
+
   return (
     <View style={styles.screen}>
-      <GoalInput goalHandler={addGoalHandler} />
+      <Button
+        title="Add New Goals"
+        onPress={() => {
+          setIsAddMode(true);
+        }}
+      />
+      <GoalInput
+        goalHandler={addGoalHandler}
+        visible={isAddMode}
+        onCancel={onCanelhandler}
+      />
       {
         // this will give warning her as we dont have any key here and for that it expect certain format of data with key
       }
