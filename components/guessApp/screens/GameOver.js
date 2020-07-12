@@ -1,12 +1,14 @@
 import React from "react";
 import { StyleSheet, Text, View, Button } from "react-native";
+import TextTitle from "../../common/TextTitle";
+import TextWrapper from "../../common/TextWrapper";
 
 const GameOver = (props) => {
   return (
     <View style={styles.screen}>
-      <Text>Game is Over!!</Text>
-      <Text>Total Number of Guess: {props.gameRounds}</Text>
-      <Text>Number to guessed: {props.userNumber} </Text>
+      <TextTitle>Game is Over!!</TextTitle>
+      <TextWrapper>Total Number of Guess: {props.gameRounds}</TextWrapper>
+      <TextWrapper>Number to guessed: {props.userNumber} </TextWrapper>
       <Button title="NEW GAME" onPress={props.onReset} />
     </View>
   );
