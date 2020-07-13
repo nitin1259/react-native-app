@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, Button, Image } from "react-native";
 import TextTitle from "../../common/TextTitle";
 import TextWrapper from "../../common/TextWrapper";
 import Colors from "../../../constants/Colors";
+import ButtonWrapper from "../../common/ButtonWrapper";
 
 const GameOver = (props) => {
   return (
@@ -27,7 +28,8 @@ const GameOver = (props) => {
           <Text style={styles.textHighlight}>{props.userNumber}</Text>
         </TextWrapper>
       </View>
-      <Button title="NEW GAME" onPress={props.onReset} />
+      {/* <Button title="NEW GAME" onPress={props.onReset} /> */}
+      <ButtonWrapper onPress={props.onReset}>NEW GAME</ButtonWrapper>
     </View>
   );
 };

@@ -47,23 +47,23 @@ export default function HomePageGuessApp() {
     setGuessRounds(totalRound);
   };
 
-  let content = (
-    <GameOver gameRounds={1} userNumber={1} onReset={configureNewGameHandler} />
-  );
-  // let content = <StartGameScreen onStartGame={startGameHandler} />;
-  // if (userNumber && guessRounds <= 0) {
-  //   content = (
-  //     <GameScreen userChoice={userNumber} onGameOver={guessRoundHandler} />
-  //   );
-  // } else if (guessRounds > 0) {
-  //   content = (
-  //     <GameOver
-  //       gameRounds={guessRounds}
-  //       userNumber={userNumber}
-  //       onReset={configureNewGameHandler}
-  //     />
-  //   );
-  // }
+  // let content = (
+  //   <GameOver gameRounds={1} userNumber={1} onReset={configureNewGameHandler} />
+  // );
+  let content = <StartGameScreen onStartGame={startGameHandler} />;
+  if (userNumber && guessRounds <= 0) {
+    content = (
+      <GameScreen userChoice={userNumber} onGameOver={guessRoundHandler} />
+    );
+  } else if (guessRounds > 0) {
+    content = (
+      <GameOver
+        gameRounds={guessRounds}
+        userNumber={userNumber}
+        onReset={configureNewGameHandler}
+      />
+    );
+  }
 
   return (
     <View style={styles.screen}>
