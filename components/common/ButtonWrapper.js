@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
     borderRadius: 25,
   },
   buttonText: {
-    color: "black",
+    color: "white",
     fontFamily: "open-sans",
     fontSize: 18,
   },
