@@ -87,7 +87,7 @@ const GameScreen = (props) => {
         </ButtonWrapper>
       </Card>
       <View style={styles.listCont}>
-        <ScrollView>
+        <ScrollView contentContainerStyle={styles.list}>
           {pastGusesses.map((guess, index) =>
             renderListItems(guess, pastGusesses.length - index)
           )}
@@ -116,6 +116,11 @@ const styles = StyleSheet.create({
     width: "80%",
     flex: 1, // this is for android scroll
   },
+  list: {
+    flexGrow: 1, // behave correctly for scrollview and flatlist
+    alignItems: "center",
+    justifyContent: "flex-end",
+  },
   listItem: {
     borderColor: "black",
     borderWidth: 2,
@@ -124,5 +129,6 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     flexDirection: "row",
     justifyContent: "space-between",
+    width: "60%",
   },
 });
