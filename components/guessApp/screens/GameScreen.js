@@ -6,6 +6,7 @@ import {
   Button,
   Alert,
   ScrollView,
+  FlatList,
 } from "react-native";
 import NumberContainer from "../NumberContainer";
 import Card from "../Card";
@@ -24,10 +25,10 @@ const generateRandomBetween = (min, max, exclude) => {
   }
 };
 
-const renderListItems = (value, numOfRounds) => (
-  <View key={value} style={styles.listItem}>
-    <TextWrapper>#{numOfRounds}</TextWrapper>
-    <TextWrapper>{value}</TextWrapper>
+const renderListItems = (listLength, itemData) => (
+  <View style={styles.listItem}>
+    <TextWrapper>#{listLength - itemData.index}</TextWrapper>
+    <TextWrapper>{itemData.item}</TextWrapper>
   </View>
 );
 
@@ -35,7 +36,7 @@ const GameScreen = (props) => {
   const initalGuess = generateRandomBetween(1, 100, props.userChoice);
   const [currentGuess, setCurrentGuess] = useState(initalGuess);
   // const [totalRound, setTotalRound] = useState(0);
-  const [pastGusesses, setPastGusesses] = useState([initalGuess]);
+  const [pastGusesses, setPastGusesses] = useState([initalGuess.toString()]);
   const currentLower = useRef(1);
   const currentHigher = useRef(100);
 
@@ -72,7 +73,10 @@ const GameScreen = (props) => {
 
     setCurrentGuess(nextNum);
     // setTotalRound((curRound) => curRound + 1);
-    setPastGusesses((curPastGuesses) => [nextNum, ...curPastGuesses]);
+    setPastGusesses((curPastGuesses) => [
+      nextNum.toString(),
+      ...curPastGuesses,
+    ]);
   };
   return (
     <View style={styles.screen}>
@@ -87,11 +91,18 @@ const GameScreen = (props) => {
         </ButtonWrapper>
       </Card>
       <View style={styles.listCont}>
-        <ScrollView contentContainerStyle={styles.list}>
+        {/* <ScrollView contentContainerStyle={styles.list}>
           {pastGusesses.map((guess, index) =>
             renderListItems(guess, pastGusesses.length - index)
           )}
-        </ScrollView>
+        </ScrollView> */}
+
+        <FlatList
+          keyExtractor={(item) => item}
+          data={pastGusesses}
+          renderItem={renderListItems.bind(this, pastGusesses.length)}
+          contentContainerStyle={styles.list}
+        />
       </View>
     </View>
   );
@@ -113,12 +124,12 @@ const styles = StyleSheet.create({
     maxWidth: "80%",
   },
   listCont: {
-    width: "80%",
+    width: "60%",
     flex: 1, // this is for android scroll
   },
   list: {
     flexGrow: 1, // behave correctly for scrollview and flatlist
-    alignItems: "center",
+    // alignItems: "center",
     justifyContent: "flex-end",
   },
   listItem: {
@@ -129,6 +140,6 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     flexDirection: "row",
     justifyContent: "space-between",
-    width: "60%",
+    width: "100%",
   },
 });
