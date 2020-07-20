@@ -7,6 +7,7 @@ import {
   Alert,
   ScrollView,
   FlatList,
+  Dimensions,
 } from "react-native";
 import NumberContainer from "../NumberContainer";
 import Card from "../Card";
@@ -119,12 +120,13 @@ const styles = StyleSheet.create({
   buttonContainer: {
     flexDirection: "row",
     justifyContent: "space-around",
-    marginTop: 20,
+    marginTop: Dimensions.get("window").height > 600 ? 20 : 5,
     width: 300,
     maxWidth: "80%",
   },
   listCont: {
-    width: "60%",
+    // width: "60%",
+    width: Dimensions.get("window").width > 500 ? "60%" : "80%",
     flex: 1, // this is for android scroll
   },
   list: {
