@@ -9,5 +9,5 @@ this is a learing project of react native from basic to advance.
 
 ## Landscape and Potrait
 
-- Dimensions API - Official Docs: https://facebook.github.io/react-native/docs/dimensions#docsNav
-- Platform-specific Code - Official Docs: https://facebook.github.io/react-native/docs/platform-specific-code
+- Dimensions API: https://facebook.github.io/react-native/docs/dimensions#docsNav
+- Platform-specific Code: https://facebook.github.io/react-native/docs/platform-specific-code
